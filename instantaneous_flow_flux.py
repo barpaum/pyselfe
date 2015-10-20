@@ -85,7 +85,7 @@ mod_initial[0].read_time_series('salt.63', nfiles=nfiles,
 mod_initial[1].read_time_series('hvel.64',nfiles=nfiles, 
                                 datadir=mod_dir, sfile=sfile)                               
                              
-for profile in profile_nodes.keys():
+for profile in list(profile_nodes.keys()):
     flow_file = os.path.join(base_dir, mod_dir, profile + '_flow.csv' )
     hdf5_file = os.path.join(base_dir, mod_dir, profile + '.h5')
     if os.path.exists(flow_file):

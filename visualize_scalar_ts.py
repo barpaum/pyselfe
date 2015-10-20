@@ -73,7 +73,7 @@ xy = np.array(p(mon_sites['DDLon'], mon_sites['DDLat'])).transpose()
 selfe = pyselfe.Dataset(selfe_data_dir + '1_salt.63', nfiles=7)
 
 for site, xy in zip(mon_sites, xy):
-    print 'processing site: ', site['Name']
+    print('processing site: ', site['Name'])
     pd = []
     if 'tc0' in site['Name']:
         data = np.genfromtxt('../field_data/' + site['Name']+'.csv', delimiter=',',
@@ -106,7 +106,7 @@ for site, xy in zip(mon_sites, xy):
                                                   int(mm), 0, 0, utc_6) for Y,m,d,hh,mm in
                                 zip(data['Y'],data['m'],data['d'],data['hh'],data['mm'])])
         field_dates, duplicate_index = np.unique(field_dates_raw, return_index=True)
-        print (field_dates_raw.size - duplicate_index.size).__str__() + "records removed."
+        print((field_dates_raw.size - duplicate_index.size).__str__() + "records removed.")
         d = {'water_level': data['water_level'][duplicate_index],
              'water_temperature': data['water_temperature'][duplicate_index],
              'salinity': data['salinity'][duplicate_index]}
@@ -127,7 +127,7 @@ for site, xy in zip(mon_sites, xy):
     #sal_series=[]
 
     if 'salinity' in params:
-        print 'reading selfe salinity data'
+        print('reading selfe salinity data')
         sal = selfe.read_time_series_xy('salt.63', xy[0], xy[1])
         dates = [start_date + timedelta(seconds=int(ts)) for ts in sal[:-1,0]]
         selfe_sal_ts = pandas.Series(sal[:-1,1], index=dates).dropna()
@@ -152,7 +152,7 @@ for site, xy in zip(mon_sites, xy):
 #        plt.savefig(site['Name'] + '_salinity.png')
 
     if 'water_level' in params:
-        print 'reading selfe water level data'
+        print('reading selfe water level data')
         sal, eta = selfe.read_time_series_xy('salt.63', xy[0], xy[1], return_eta=True)
         dates = [start_date + timedelta(seconds=int(ts)) for ts in eta[:-1,0]]
         selfe_eta_ts = pandas.Series(eta[:-1,1], index=dates).dropna()

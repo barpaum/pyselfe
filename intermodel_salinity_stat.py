@@ -26,7 +26,7 @@ mod_files = {'scenone':os.path.join('/home/snegusse/modeling/brazos_river/histor
 start_datetime = pd.datetime(2008,8,24)
 sim_data_dict = {}
 sim_percentiles = {}
-for sim in mod_files.keys():
+for sim in list(mod_files.keys()):
     param_data = np.genfromtxt(mod_files[sim], dtype=np.float)
     mod_datetimes = [pd.datetools.Second(t) + start_datetime for t in param_data[:,0]]
 
@@ -93,10 +93,10 @@ for site in scen_1_sites:
     if parameter == 'water_level':
         mod_site = site + 'u'
 #    obs_data = obs_data[obs_data > 0.]
-    sim_one_data = sim_data_dict[mod_files.keys()[0]]
-    sim_one_data[site].plot(style='-', label=mod_files.keys()[0])
-    sim_two_data = sim_data_dict[mod_files.keys()[1]]
-    sim_two_data[site].plot(style='-', label=mod_files.keys()[1])
+    sim_one_data = sim_data_dict[list(mod_files.keys())[0]]
+    sim_one_data[site].plot(style='-', label=list(mod_files.keys())[0])
+    sim_two_data = sim_data_dict[list(mod_files.keys())[1]]
+    sim_two_data[site].plot(style='-', label=list(mod_files.keys())[1])
     plt.title(site.upper() + ' - ' + site)
     plt.ylabel(parameter)
 #    plt.ylim(0,35)    

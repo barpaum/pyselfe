@@ -139,13 +139,13 @@ def _timed(func):
         out = func(*__args,**__kw)
         end = time.time()
         dt = end-start
-        print "in %f sec" % dt,
+        print("in %f sec" % dt, end=' ')
         return (out, dt)
     return wrapper
     
 def _subtestReadWrite(a, size, fn, fread, fwrite, what='Some'):
     import os
-    print " %s testing .." % what,
+    print(" %s testing .." % what, end=' ')
     
     # Speed tests
     @_timed
@@ -178,11 +178,11 @@ def _subtestReadWrite(a, size, fn, fread, fwrite, what='Some'):
     # Finalize stuff
     if all(a == a1) and all(abs(b-b2) < 0.01) and \
        all(abs(b-b3) < 1) and all(abs(b-b4) < 1) and all(abs(b-b5) < 1):
-        print ".. passed"
+        print(".. passed")
     else:
-        print ".. failed"
-        print " a=%s\na1=%s\nb2=%s\nb3=%s\nb4=%s\nb5=%s" % (
-            a, a1, b2, b3, b4, b5)
+        print(".. failed")
+        print(" a=%s\na1=%s\nb2=%s\nb3=%s\nb4=%s\nb5=%s" % (
+            a, a1, b2, b3, b4, b5))
     return dtW+dtR
 
 @_timed
@@ -195,7 +195,7 @@ def _testFreadFwrite():
     a = 127*(np.random.random_sample(n)-0.5)
     fn = 'temp.bin'
     dt = []
-    print "Testing numpyIO with %d random samples written/read:" % n
+    print("Testing numpyIO with %d random samples written/read:" % n)
     
     # Baseline scipy.io.numpyio
     t1 = _subtestReadWrite(a, a.size, fn, numpyio.fread, numpyio.fwrite, 
@@ -211,15 +211,15 @@ def _testFreadFwrite():
     # Print the relative results
     def printSlower(t1, t2, what1='a', what2='b'):
         speed = ('slower','faster')[t2<t1]
-        print " %s is %2d%% %s than %s" % (
-            what2, 100*abs(t2-t1)/t1, speed, what1)
+        print(" %s is %2d%% %s than %s" % (
+            what2, 100*abs(t2-t1)/t1, speed, what1))
     printSlower(t1, t2, "SciPy's numpyio", "numpyIO")
     printSlower(t1, t3, "SciPy's numpyio", "numpyIo")
     printSlower(t1, t4, "SciPy's numpyio", "numpyiO")
         
 def _testAutoNum():
     import os
-    print "Testing auto num feature of numpyIO ..",
+    print("Testing auto num feature of numpyIO ..", end=' ')
     a = np.array((1,2,3),'d')
     fn = 'temp2.bin'
     with open(fn,'w+b') as fid:
@@ -228,10 +228,10 @@ def _testAutoNum():
         a1 = fread(fid, -1, 'd')
     os.remove(fn)
     if all(a == a1):
-        print "passed"
+        print("passed")
     else:
-        print "failed"
-        print " a=%s\na1=%s" % (a, a1)
+        print("failed")
+        print(" a=%s\na1=%s" % (a, a1))
     
 def test():
     '''Run all unit tests'''

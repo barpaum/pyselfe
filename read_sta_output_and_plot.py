@@ -21,7 +21,7 @@ obs_file = os.path.join(base_dir, 'all_sites_salinity.csv')
 start_datetime = pd.datetime(2008,8,24)
 sim_data_dict = {}
 
-for sim in mod_files.keys():
+for sim in list(mod_files.keys()):
     sal_data = np.genfromtxt(mod_files[sim], dtype=np.float)
     mod_datetimes = [pd.datetools.Second(t) + start_datetime for t in sal_data[:,0]]
     

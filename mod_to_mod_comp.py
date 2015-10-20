@@ -23,7 +23,7 @@ obs_file = os.path.join(base_dir, 'all_sites_salinity.csv')
 start_datetime = pd.datetime(2008,8,24)
 sim_data_dict = {}
 
-for sim in mod_files.keys():
+for sim in list(mod_files.keys()):
     sal_data = np.genfromtxt(mod_files[sim], dtype=np.float)
     mod_datetimes = [pd.datetools.Second(t) + start_datetime for t in 
                     sal_data[:,0]]
@@ -54,7 +54,7 @@ for site in selected_sites:
     site_dict = {}
     stat_dict = {}
 
-    for sim in mod_files.keys():
+    for sim in list(mod_files.keys()):
         if site in sim_data_dict[sim]:
             site_dict[sim] = sim_data_dict[sim][site]
             stat_dict[sim] = site_dict[sim].ix[start_date:end_date].describe().ix['mean']
@@ -66,7 +66,7 @@ for site in selected_sites:
     plt.ylabel('salinity, psu')
 #    plt.xlim(start_date, end_date)
     plt.ylim(-0.1,45)
-    if len(stat_dict.keys())==2:
+    if len(list(stat_dict.keys()))==2:
         plt.annotate('mean salinity:\ndiverted_river_no_giww= ' 
                     + str(stat_dict['diverted_river_no_giww'])[:3] + ' psu' + '\n' + \
                  'diverted_river_w_giww= ' + str(stat_dict['diverted_river_w_giww'])[:3] + ' psu' + '\n', 

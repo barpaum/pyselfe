@@ -51,7 +51,7 @@ sites_vvel_data = {}
 sites_dp_data = {}
 mod_t = {}
 
-for i in mod_dirs.keys():
+for i in list(mod_dirs.keys()):
     hdf5_file = os.path.join(base_dir, mod_dirs[i], i + '_' + \
                             'mod_data' + '.h5')
     if os.path.exists(hdf5_file):
@@ -106,7 +106,7 @@ for site in brazos_sites.index:
     site_uprime_dict = {}
     site_dp_dict = {}
     site_salt_flux = {}
-    for sim in sites_sal_data.keys():
+    for sim in list(sites_sal_data.keys()):
         site_sal_dict[sim] = sites_sal_data[sim].xs(site).T
         site_uvel_dict[sim] = sites_uvel_data[sim].xs(site).T
         site_vvel_dict[sim] = sites_vvel_data[sim].xs(site).T

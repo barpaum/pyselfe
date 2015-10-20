@@ -205,7 +205,7 @@ class Dataset:
                     tmpdata = tmpdata[nodes,:,:]
                     tmpdata = tmpdata[:,levels,:]
                     data.append(tmpdata)
-                print "file " + fname1 + "out of " + str(nfiles) + " read"
+                print("file " + fname1 + "out of " + str(nfiles) + " read")
             except IOError:
                 continue
             except ValueError:
@@ -291,7 +291,7 @@ class Dataset:
         if (parent==-1):
             sys.exit('Cannot find a parent:' + str(x00) +',' +str(y00))
         else:
-            print 'Parent Element :',parent+1,' ,Nodes: ',node3
+            print('Parent Element :',parent+1,' ,Nodes: ',node3)
             return [parent, arco, node3]
       
         
